@@ -1,6 +1,9 @@
-import { Button, Htag, P, Tag } from "@/components";
+import { Button, Htag, P, Rating, Tag } from "@/components";
+import { withLayout } from "@/layout/layout";
+import { useState } from "react";
 
-export default function Home(): JSX.Element {
+function Home(): JSX.Element {
+  const [rating, setRating] = useState<number>(4);
   return (
     <>
       <Htag tag="h1">Текст</Htag>
@@ -19,6 +22,9 @@ export default function Home(): JSX.Element {
         Мал
       </Tag>
       <Tag color="primary">Мал</Tag>
+      <Rating rating={rating} isEditable setRating={setRating}></Rating>
     </>
   );
 }
+
+export default withLayout(Home);
