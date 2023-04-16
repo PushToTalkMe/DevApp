@@ -1,3 +1,4 @@
+import React from "react";
 import { withLayout } from "@/layout/layout";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import axios from "axios";
@@ -35,6 +36,12 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
       notFound: true,
     };
   }
+  const { data: menu } = await axios.post<MenuItem[]>(
+    process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
+    {
+      firstCategory,
+    }
+  );
   const { data: page } = await axios.get<TopPageModel>(
     process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/byAlias/" + params.alias
   );
@@ -47,6 +54,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
   );
   return {
     props: {
+      menu,
       firstCategory,
       page,
       products,
@@ -55,6 +63,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
 };
 
 interface CourseProps extends Record<string, unknown> {
+  menu: MenuItem[];
   firstCategory: number;
   page: TopPageModel;
   products: ProductModel[];
