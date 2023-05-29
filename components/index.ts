@@ -13,3 +13,4 @@ export * from "./product/product";
 export * from "./card/card";
 export * from "./divider/divider";
 export * from "./review/review";
+export * from "./review_form/review_form";

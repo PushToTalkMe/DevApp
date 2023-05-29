@@ -1,4 +1,12 @@
-import { Button, Card, Divider, Rating, Review, Tag } from "@/components";
+import {
+  Button,
+  Card,
+  Divider,
+  Rating,
+  Review,
+  Tag,
+  ReviewForm,
+} from "@/components";
 import styles from "./product.module.css";
 import { ProductProps } from "./product.props";
 import cn from "classnames";
@@ -98,8 +106,12 @@ export const Product = ({
         })}
       >
         {product.reviews.map((r) => (
-          <Review key={r._id} review={r} />
+          <>
+            <Review key={r._id} review={r} />
+            <Divider />
+          </>
         ))}
+        <ReviewForm productId={product._id}></ReviewForm>
       </Card>
     </>
   );
